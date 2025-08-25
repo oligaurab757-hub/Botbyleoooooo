@@ -17,6 +17,35 @@ async function ensureTables() {
     data JSONB
   );`);
 }
+const makeWASocket = require("@whiskeysockets/baileys").default;
+const { useMultiFileAuthState } = require("@whiskeysockets/baileys");
+const qrcode = require("qrcode-terminal");
+const fs = require("fs");
+
+async function startBot() {
+  const { state, saveCreds } = await useMultiFileAuthState("auth_info");
+
+  const sock = makeWASocket({
+    auth: state,
+    printQRInTerminal: true,
+  });
+
+  // Save QR as PNG file too
+  sock.ev.on("connection.update", (update) => {
+    const { qr } = update;
+    if (qr) {
+      qrcode.generate(qr, { small: true }); // ASCII QR in logs
+      require("qrcode").toFile("qr.png", qr, (err) => {
+        if (err) console.error("❌ QR Save Error:", err);
+        else console.log("✅ QR saved as qr.png, download & scan it.");
+      });
+    }
+  });
+
+  sock.ev.on("creds.update", saveCreds);
+}
+
+startBot();
 
 const processed = new Set();
 function seenOnce(id) {
