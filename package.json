@@ -1,0 +1,20 @@
+{
+  "name": "whatsapp-bot-v7-final",
+  "version": "7.0.0",
+  "description": "WhatsApp calculator bot with Postgres persistence, Nepali formatting, and Railway deploy",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=20.x"
+  },
+  "dependencies": {
+    "@hapi/boom": "^10.0.1",
+    "@whiskeysockets/baileys": "^6.7.2",
+    "mathjs": "^12.4.1",
+    "pg": "^8.11.5",
+    "qrcode": "^1.5.1",
+    "qrcode-terminal": "^0.12.0"
+  }
+}

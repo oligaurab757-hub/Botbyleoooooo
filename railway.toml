@@ -1,0 +1,9 @@
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "node index.js"
+
+[env]
+DECIMALS = "2"
+TZ = "Asia/Kathmandu"
