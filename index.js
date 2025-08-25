@@ -34,7 +34,8 @@ async function startBot() {
   sock.ev.on("connection.update", (update) => {
     const { qr } = update;
     if (qr) {
-      qrcode.generate(qr, { small: true }); // ASCII QR in logs
+    qrcode.generate(qr, { small: false }); // large, scannable QR
+ // ASCII QR in logs
       require("qrcode").toFile("qr.png", qr, (err) => {
         if (err) console.error("❌ QR Save Error:", err);
         else console.log("✅ QR saved as qr.png, download & scan it.");
